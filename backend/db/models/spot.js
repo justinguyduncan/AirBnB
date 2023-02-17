@@ -24,68 +24,64 @@ module.exports = (sequelize, DataTypes) => {
     address: {
       type: DataTypes.STRING,
       allowNull: false,
-      validate: {
-        notEmpty: {
-          msg : 'Street address is required'
-        }
+      validate:{
+        notEmpty: true
       }
     },
     city: {
       type: DataTypes.STRING,
-      allowNull: false
+      allowNull: false,
+      validate:{
+        notEmpty: true
+      }
     },
     state: {
       type: DataTypes.STRING,
-      allowNull: false
+      allowNull: false,
+      validate:{
+        notEmpty: true
+      }
     },
     country: {
       type: DataTypes.STRING,
-      allowNull: false
-    },
-    lat: {
-      type: DataTypes.FLOAT,
       allowNull: false,
       validate:{
-        isFloat: {
-          msg: 'Latitude is not valid'
-        }
+        notEmpty: true
+      }
+    },
+    lat: {
+      type: DataTypes.DECIMAL,
+      allowNull: false,
+      validate:{
+        notEmpty: true
       }
     },
     lng: {
-      type: DataTypes.FLOAT,
+      type: DataTypes.DECIMAL,
       allowNull: false,
       validate:{
-        isFloat: {
-          msg: 'Longitude is not valid'
-        }
+        notEmpty: true
       }
     },
     name: {
       type: DataTypes.STRING(50),
       allowNull: false,
       validate:{
-        len:{
-          msg: 'Name must be less than 50 characters'
-        }
+        notEmpty: true
       }
     },
     description: {
-      type: DataTypes.STRING,
-      allowNull: false
+      type: DataTypes.STRING
     },
     price: {
       type: DataTypes.INTEGER,
       allowNull: false,
       validate:{
-        notEmpty:{
-          msg: 'Price per day is required'
-        }
+        notEmpty: true
       }
     },
-    avgRating: {
-      type: DataTypes.FLOAT,
-      allowNull: false
-    }
+    // avgRating: DataTypes.DECIMAL,
+    // previewImage: DataTypes.STRING
   }, {
     sequelize,
     modelName: 'Spot',

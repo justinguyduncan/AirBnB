@@ -8,7 +8,8 @@ if (process.env.NODE_ENV === 'production') {
 
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('Spots', {
+    options.tableName = 'Spots'
+    await queryInterface.createTable(options, {
       id: {
         type: Sequelize.INTEGER,
         primaryKey: true,
@@ -38,11 +39,11 @@ module.exports = {
         allowNull: false
       },
       lat: {
-        type: Sequelize.FLOAT,
+        type: Sequelize.DECIMAL,
         allowNull: false
       },
       lng: {
-        type: Sequelize.FLOAT,
+        type: Sequelize.DECIMAL,
         allowNull: false
       },
       name: {
@@ -57,10 +58,12 @@ module.exports = {
         type: Sequelize.INTEGER,
         allowNull: false
       },
-      avgRating: {
-        type: Sequelize.FLOAT,
-        allowNull: false
-      },
+      // avgRating: {
+      //   type: Sequelize.DECIMAL,
+      // },
+      // previewImage: {
+      //   type: Sequelize.STRING
+      // },
       createdAt: {
         type: Sequelize.DATE,
         allowNull: false,
@@ -74,6 +77,7 @@ module.exports = {
     }, options);
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('Spots', options);
+    options.tableName = 'Spots'
+    await queryInterface.dropTable(options);
   }
 };
