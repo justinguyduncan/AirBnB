@@ -2,7 +2,7 @@
 const router = require('express').Router();
 const sessionRouter = require('./session.js');
 const usersRouter = require('./users.js');
-const spotsRouter = require('./spot.js');
+const spotsRouter = require('./spots.js');
 const { restoreUser } = require("../../utils/auth.js");
 
 
