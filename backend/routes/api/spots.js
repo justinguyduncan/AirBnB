@@ -1,6 +1,6 @@
 const express = require('express');
-const { setTokenCookie, requireAuth } = require('../../utils/auth');
-const { User, Spot, Review, SpotImage } = require('../../db/models');
+const { setTokenCookie, requireAuth, Booking } = require('../../utils/auth');
+const { User, Spot, Review, SpotImage, ReviewImage } = require('../../db/models');
 const { Sequelize } = require('sequelize');
 
 
@@ -152,6 +152,10 @@ router.post('/:spotId/images', async(req, res) =>{
         };
         return res.status(201).json(result)
 });
+
+
+
+
 
 //Get All Spots Owned by Current User
 router.get('/current', async (req, res) => {
@@ -309,4 +313,165 @@ router.delete('/:spotId', requireAuth, async (req, res) => {
   }
 
 })
+
+
+
+//Create a Review For a Spot based on spotId
+router.post('/:spotId/reviews', requireAuth, validateReview, async (req, res) => {
+  const { review, stars } = req.body;
+
+    // Check if the spot exists
+    const spot = await Spot.findByPk(req.params.spotId);
+    if (!spot) {
+      return res.status(404).json({
+        message: 'Spot not found',
+        statusCode: 404
+      });
+    }
+
+    // Check if the user already has a review for this spot
+    const existingReview = await Review.findOne({
+      where: {
+        userId: req.user.id,
+        spotId: req.params.spotId
+      }
+    });
+    if (existingReview) {
+      return res.status(403).json({
+        message: 'User already has a review for this spot',
+        statusCode: 403
+      });
+    }
+
+    // Create the new review
+    const newReview = await Review.create({
+      review,
+      stars,
+      userId: req.user.id,
+      spotId: req.params.spotId
+    });
+
+    // Get the created review data including createdAt and updatedAt
+    const createdReview = await Review.findByPk(newReview.id, {
+      attributes: [
+        'id',
+        'userId',
+        'spotId',
+        'review',
+        'stars',
+        'createdAt',
+        'updatedAt'
+      ]
+    });
+
+    return res.json(createdReview);
+});
+
+
+//Get all Reviews by a Spot's id
+router.get('/:spotId/reviews', async (req, res) => {
+  const spotId = req.params.spotId;
+
+  const findSpot = await Spot.findByPk(spotId, {
+    include: [
+      {
+        model: Review,
+        include: [
+          {
+            model: User,
+            attributes: ['id', 'firstName', 'lastName'],
+          },
+          {
+            model: ReviewImage,
+            attributes: ['id', 'url'],
+          },
+        ],
+      },
+    ],
+  });
+
+  if (!findSpot) {
+    return res.status(404).json({ message: 'Spot not found', statusCode: 404 });
+  }
+
+  const reviews = findSpot.Reviews;
+
+  return res.json(reviews);
+});
+
+// //Create Booking from Spot based on SpotId
+// router.post('/:spotId/bookings', requireAuth, async (req, res) => {
+//     const spot = await Spot.findByPk(req.params.spotId);
+//     const user = req.user;
+//     const { startDate, endDate } = req.body;
+
+//     if (!spot) {
+//       return res.status(404).json({
+//         message: 'Spot not found',
+//         statusCode: 404
+//       });
+//     }
+
+//     if (user.id === spot.ownerId) {
+//       return res.status(403).json({
+//         message: 'You cannot book your own spot',
+//         statusCode: 403
+//       });
+//     }
+
+//     const existingBooking = await Booking.findOne({
+//       where: {
+//         spotId: spot.id,
+//         [Op.or]: [
+//           {
+//             startDate: {
+//               [Op.between]: [startDate, endDate],
+//             },
+//           },
+//           {
+//             endDate: {
+//               [Op.between]: [startDate, endDate],
+//             },
+//           },
+//           {
+//             startDate: {
+//               [Op.lte]: startDate,
+//             },
+//             endDate: {
+//               [Op.gte]: endDate,
+//             },
+//           },
+//         ],
+//       },
+//     });
+
+//     if (existingBooking) {
+//       return res.status(403).json({
+//         message: 'Booking already exists for specified dates',
+//         statusCode: 403,
+//       });
+//     }
+
+//     const booking = await Booking.create({
+//       userId: user.id,
+//       spotId: spot.id,
+//       startDate,
+//       endDate,
+//     });
+
+//     const resObj = {
+//       id: booking.id,
+//       userId: booking.userId,
+//       spotId: booking.spotId,
+//       startDate: booking.startDate,
+//       endDate: booking.endDate,
+//       createdAt: booking.createdAt,
+//       updatedAt: booking.updatedAt,
+//     };
+
+//     return res.status(200).json(resObj);
+
+
+// });
+
 module.exports = router;
