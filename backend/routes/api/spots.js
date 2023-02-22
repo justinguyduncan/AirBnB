@@ -61,59 +61,98 @@ const validateReview = [
 //Get All Spots
 // Define a route for getting all spots.
 router.get('/', async (req, res) => {
-    const spots = await Spot.findAll({
-      attributes: [
-        'id',
-        'ownerId',
-        'address',
-        'city',
-        'state',
-        'country',
-        'lat',
-        'lng',
-        'name',
-        'description',
-        'price',
-        [Sequelize.fn('AVG', Sequelize.col('Reviews.stars')), 'avgRating'],
-        'createdAt',
-        'updatedAt'
-      ],
-      include: [
-        {
-          model: SpotImage,
-          attributes: ['url']
-        },
-        {
-          model: Review,
-          attributes: []
-        }
-      ],
-      group: ['Spot.id']
-    });
+  let { page, size, minLat, maxLat, minLng, maxLng, minPrice, maxPrice } = req.query;
 
-    const result = spots.map((spot) => {
-      const previewImage = spot.SpotImages[0];
-      return {
-        id: spot.id,
-        ownerId: spot.ownerId,
-        address: spot.address,
-        city: spot.city,
-        state: spot.state,
-        country: spot.country,
-        lat: spot.lat,
-        lng: spot.lng,
-        name: spot.name,
-        description: spot.description,
-        price: spot.price,
-        createdAt: spot.createdAt,
-        updatedAt: spot.updatedAt,
-        avgRating: spot.dataValues.avgRating,
-        previewImage: previewImage ? previewImage.url : null
-      };
-    });
+  page = Number(page);
+  size = Number(size);
 
-    return res.json(result);
+  // Check for invalid query parameters
+  // if (Number.isNaN(page) || page <= 0 || Number.isNaN(size) || size <= 0 ||
+  //     (minLat && (Number.isNaN(minLat) || minLat < -90 || minLat > 90)) ||
+  //     (maxLat && (Number.isNaN(maxLat) || maxLat < -90 || maxLat > 90)) ||
+  //     (minLng && (Number.isNaN(minLng) || minLng < -180 || minLng > 180)) ||
+  //     (maxLng && (Number.isNaN(maxLng) || maxLng < -180 || maxLng > 180)) ||
+  //     (minPrice && (Number.isNaN(minPrice) || minPrice < 0)) ||
+  //     (maxPrice && (Number.isNaN(maxPrice) || maxPrice < 0))) {
+  //   return res.status(400).json({ message: 'Invalid query parameters', statusCode: 400 });
+  // }
+
+  // Set default values for page and size
+  if (!page) page = 1;
+  if (!size) size = 20;
+
+  const spots = await Spot.findAll({
+    where: {
+      lat: {
+        [Op.gte]: minLat || -90,
+        [Op.lte]: maxLat || 90,
+      },
+      lng: {
+        [Op.gte]: minLng || -180,
+        [Op.lte]: maxLng || 180,
+      },
+      price: {
+        [Op.gte]: minPrice || 0,
+        [Op.lte]: maxPrice || 999999,
+      },
+    },
+    limit: size,
+    offset: Math.abs(size * (page - 1)),
+    attributes: [
+      'id',
+      'ownerId',
+      'address',
+      'city',
+      'state',
+      'country',
+      'lat',
+      'lng',
+      'name',
+      'description',
+      'price',
+      'createdAt',
+      'updatedAt',
+    ],
   });
+
+  // Get previewImage and average rating for each spot
+  for await (let spot of spots) {
+    const previewImage = await SpotImage.findOne({
+      where: {
+        spotId: spot.id,
+        preview: true,
+      },
+    });
+
+    if (previewImage) {
+      spot.dataValues.previewImage = previewImage.url;
+    } else {
+      spot.dataValues.previewImage = null;
+    }
+
+    const rating = await Review.findAll({
+      where: {
+        spotId: spot.id,
+      },
+    });
+
+    let sum = 0;
+
+    if (rating.length) {
+      rating.forEach((ele) => {
+        sum += ele.stars;
+      });
+
+      let avg = sum / rating.length;
+
+      spot.dataValues.avgRating = avg;
+    } else {
+      spot.dataValues.avgRating = null;
+    }
+  }
+
+  return res.json({ spots, page, size });
+});
 
 //Create a new spot
 router.post('/', validateSpot, handleValidationErrors, async (req, res) => {
