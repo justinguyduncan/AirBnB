@@ -284,10 +284,14 @@ router.get('/current', async (req, res) => {
         },
         {
           model: Review,
-          attributes: [[Sequelize.fn('COUNT', Sequelize.col('*')), 'numReviews'], [Sequelize.fn('AVG', Sequelize.col('Reviews.stars')), 'avgRating']],
-        },
+          attributes: [
+            'id',
+            [Sequelize.fn('COUNT', Sequelize.col('*')), 'numReviews'],
+            [Sequelize.fn('AVG', Sequelize.col('Reviews.stars')), 'avgRating']
+          ]
+        }
       ],
-      group: ['Spot.id', 'User.id', 'SpotImages.id', 'Review.id']
+      group: ['Spot.id', 'User.id', 'SpotImages.id']
     });
 
     if (!spot) {
