@@ -35,7 +35,7 @@ router.post('/:reviewId/images', requireAuth, async (req, res) => {
     }
 
     if (review.userId !== userId) {
-      return res.status(403).json({ message: "Only the owner of the review can add an image", statusCode: 403 });
+      return res.status(403).json({message: "Forbidden", statusCode: 403 });
     }
 
     const images = await ReviewImage.findAll({ where: { reviewId } });
@@ -122,7 +122,7 @@ router.delete('/:reviewId', requireAuth, async (req, res) => {
     }
 
     if (userId !== review.userId) {
-      return res.status(403).json({ message: "Unauthorized", statusCode: 403 });
+      return res.status(403).json({  "message": "Forbidden", statusCode: 403 });
     }
 
     await review.destroy();
