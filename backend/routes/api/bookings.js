@@ -42,7 +42,7 @@ router.get('/current', requireAuth, async (req, res) => {
             attributes: []
           }
         ],
-        group: ['Spot.id', 'SpotImages.url']
+        group: ['Spot.id', 'SpotImages.id','SpotImages.url']
       });
 
       const bookings = await Booking.findAll({
