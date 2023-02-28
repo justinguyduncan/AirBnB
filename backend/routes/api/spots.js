@@ -436,11 +436,34 @@ router.get('/:spotId/reviews', async (req, res) => {
 
   if (!findSpot) {
     return res.status(404).json({ message: 'Spot not found', statusCode: 404 });
+  } else {
+    const reviews = findSpot.Reviews;
+
+    const formattedReviews = reviews.map(review => {
+      return {
+        id: review.id,
+        userId: review.userId,
+        spotId: review.spotId,
+        review: review.review,
+        stars: review.stars,
+        createdAt: review.createdAt,
+        updatedAt: review.updatedAt,
+        User: {
+          id: review.User.id,
+          firstName: review.User.firstName,
+          lastName: review.User.lastName,
+        },
+        ReviewImages: review.ReviewImages.map(reviewImage => {
+          return {
+            id: reviewImage.id,
+            url: reviewImage.url,
+          };
+        }),
+      };
+    });
+
+    return res.json({ Reviews: formattedReviews });
   }
-
-  const reviews = findSpot.Reviews;
-
-  return res.json(reviews);
 });
 
 //Create Booking from Spot based on SpotId
@@ -455,7 +478,7 @@ router.post('/:spotId/bookings', requireAuth, async (req, res) => {
   }
 
   if(req.user.id === spot.ownerId){
-    return res.status(400).json({
+    return res.status(403).json({
       message: "Forbidden",
       statusCode: 403
   });
@@ -528,7 +551,6 @@ router.get('/:spotId/bookings', requireAuth, async (req, res) => {
       },
       where: {
         spotId: req.params.spotId,
-        userId: req.user.id,
       },
     });
     return res.status(200).json({ Bookings: bookings });
@@ -537,12 +559,11 @@ router.get('/:spotId/bookings', requireAuth, async (req, res) => {
       where: {
         spotId: req.params.spotId,
       },
-      attributes: {
-        exclude: ['id', 'userId', 'createdAt', 'updatedAt'],
-      },
+      attributes: ['spotId', 'startDate', 'endDate'],
     });
     return res.status(200).json({ Bookings: bookings });
   }
 });
+
 
 module.exports = router;

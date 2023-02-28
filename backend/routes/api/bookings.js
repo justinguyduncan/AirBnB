@@ -42,7 +42,7 @@ router.get('/current', requireAuth, async (req, res) => {
             attributes: []
           }
         ],
-        group: ['Spot.id', 'SpotImages.']
+        group: ['Spot.id', 'SpotImages.url']
       });
 
       const bookings = await Booking.findAll({
@@ -155,7 +155,8 @@ router.get('/current', requireAuth, async (req, res) => {
     updateBooking.endDate = endDate;
 
     await updateBooking.save();
-    return res.json(updateBooking);
+    const updatedBooking = await Booking.findByPk(req.params.bookingId);
+    return res.json(updatedBooking);
   });
 
 //Delete Booking
