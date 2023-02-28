@@ -1,5 +1,5 @@
 const express = require('express');
-const { setTokenCookie, requireAuth,} = require('../../utils/auth');
+const { setTokenCookie, requireAuth, validateSpotOwner} = require('../../utils/auth');
 const { User, Spot, Review, SpotImage, ReviewImage,  Booking  } = require('../../db/models');
 const { Sequelize } = require('sequelize');
 const { Op } = require('sequelize');
@@ -282,14 +282,11 @@ router.get('/current', async (req, res) => {
           model: SpotImage,
           attributes: ['id', 'url', 'preview']
         },
-        {
-          model: Review,
-          attributes: [
-            'id',
-            [Sequelize.fn('COUNT', Sequelize.col('*')), 'numReviews'],
-            [Sequelize.fn('AVG', Sequelize.col('Reviews.stars')), 'avgRating']
-          ]
-        }
+       {
+  model: Review,
+  attributes: [[Sequelize.fn('COUNT', Sequelize.col('*')), 'numReviews'], [Sequelize.fn('AVG', Sequelize.col('Reviews.stars')), 'avgRating']],
+  include: [{ model: Spot, as: 'Spot', attributes: [] }]
+},
       ],
       group: ['Spot.id', 'User.id', 'SpotImages.id', 'Reviews.id']
     });
@@ -322,14 +319,17 @@ router.get('/current', async (req, res) => {
 
 
 //Edit a Spot
-router.put('/:spotId', validateSpot, requireAuth, async (req, res) => {
+router.put('/:spotId', validateSpot, requireAuth, validateSpotOwner, async (req, res) => {
   const { address, city, state, country, lat, lng, name, description, price } = req.body;
 
   const updateSpot = await Spot.findByPk(req.params.spotId);
 
+
   if (!updateSpot) {
     return res.status(404).json({ message: "Spot couldn't be found", statusCode: 404 });
   }
+
+
 
   const updatedFields = { address, city, state, country, lat, lng, name, description, price };
 
@@ -456,8 +456,8 @@ router.post('/:spotId/bookings', requireAuth, async (req, res) => {
 
   if(req.user.id === spot.ownerId){
     return res.status(400).json({
-      message: "You can't book your own spot.",
-      statusCode: 400
+      message: "Forbidden",
+      statusCode: 403
   });
   }
 

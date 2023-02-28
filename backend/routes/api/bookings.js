@@ -42,7 +42,7 @@ router.get('/current', requireAuth, async (req, res) => {
             attributes: []
           }
         ],
-        group: ['Spot.id', 'SpotImages.id']
+        group: ['Spot.id', 'SpotImages.']
       });
 
       const bookings = await Booking.findAll({
@@ -108,7 +108,7 @@ router.get('/current', requireAuth, async (req, res) => {
     }
 
     if (updateBooking.userId !== req.user.id && updateBooking.Spot.ownerId !== req.user.id) {
-        return res.status(403).json({ message: "You don't have permission to update this booking", statusCode: 403 });
+        return res.status(403).json({ message: "Forbidden", statusCode: 403 });
       }
 
     const start = new Date(startDate);
@@ -173,7 +173,7 @@ router.delete('/:bookingId', requireAuth, async (req, res) => {
         }
 
      if (deleteBooking.userId !== req.user.id && deleteBooking.Spot.ownerId !== req.user.id) {
-          return res.status(403).json({ message: "You don't have permission to delete this booking", statusCode: 403 });
+          return res.status(403).json({ message: "Forbidden", statusCode: 403 });
         }
 
     await deleteBooking.destroy();

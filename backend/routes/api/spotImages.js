@@ -25,7 +25,7 @@ router.delete('/:imageId', async (req, res) => {
     // Check if the user owns the spot that the image belongs to
     if (image.Spot.ownerId !== user) {
       return res.status(403).json({
-        message: "You are not authorized to delete images for this spot",
+        message: "Forbidden",
         statusCode: 403
       });
     }

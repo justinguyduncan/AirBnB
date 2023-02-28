@@ -24,8 +24,8 @@ router.delete('/:imageId', async (req, res) => {
 
     if (image.Review.userId !== user) {
       return res.status(403).json({
-        message: "You are not authorized to delete images for this spot",
-        statusCode: 403
+        "message": "Forbidden",
+        "statusCode": 403
       });
     }
 
