@@ -1,0 +1,60 @@
+/* Center the login form vertically and horizontally */
+.login-form-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+
+  /* Style the form container */
+  .login-form {
+    background-color: #ffffff;
+    border-radius: 4px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    padding: 40px;
+    width: 400px;
+  }
+
+  /* Style the form headings */
+  .login-form h2 {
+    margin-top: 0;
+    margin-bottom: 20px;
+  }
+
+  /* Style the form labels */
+  .login-form label {
+    display: block;
+    font-size: 16px;
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+
+  /* Style the form inputs */
+  .login-form input[type="email"],
+  .login-form input[type="password"] {
+    border-radius: 4px;
+    border: 1px solid #dcdcdc;
+    box-sizing: border-box;
+    font-size: 16px;
+    padding: 10px;
+    width: 100%;
+  }
+
+  /* Style the form submit button */
+  .login-form button[type="submit"] {
+    background-color: #4CAF50;
+    border: none;
+    border-radius: 4px;
+    color: #ffffff;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+    margin-top: 20px;
+    padding: 10px;
+    width: 100%;
+    transition: background-color 0.2s ease-in-out;
+  }
+
+  .login-form button[type="submit"]:hover {
+    background-color: #3e8e41;
+  }
