@@ -282,17 +282,26 @@ router.get('/current', async (req, res) => {
           model: SpotImage,
           attributes: ['id', 'url', 'preview']
         },
-       {
-  model: Review,
-  attributes: [[Sequelize.fn('COUNT', Sequelize.col('*')), 'numReviews'], [Sequelize.fn('AVG', Sequelize.col('Reviews.stars')), 'avgRating']],
-  include: [{ model: Spot, as: 'Spot', attributes: [] }]
-},
+        {
+          model: Review,
+          attributes: [
+            [Sequelize.fn('COUNT', Sequelize.col('*')), 'numReviews'],
+            [Sequelize.fn('AVG', Sequelize.col('Reviews.stars')), 'avgRating']
+          ],
+          include: [
+            {
+              model: Spot,
+              as: 'Spot',
+              attributes: []
+            }
+          ]
+        }
       ],
-      group: ['Spot.id', 'User.id', 'SpotImages.id', 'Reviews.id']
+      group: ['Spot.id', 'User.id', 'SpotImages.id']
     });
 
     if (!spot) {
-      return res.status(404).json({ message: 'Spot not found.', statusCode : 404 });
+      return res.status(404).json({ message: 'Spot not found.', statusCode: 404 });
     }
 
     res.json({
@@ -309,8 +318,8 @@ router.get('/current', async (req, res) => {
       price: spot.price,
       createdAt: spot.createdAt,
       updatedAt: spot.updatedAt,
-      numReviews: spot.Reviews[0].dataValues.numReviews,
-      avgRating: spot.Reviews[0].dataValues.avgRating,
+      numReviews: spot.Reviews.length > 0 ? spot.Reviews[0].dataValues.numReviews : 0,
+      avgRating: spot.Reviews.length > 0 ? spot.Reviews[0].dataValues.avgRating : 0,
       SpotImages: spot.SpotImages,
       Owner: spot.User
     });
