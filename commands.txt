@@ -1,0 +1,132 @@
+Backend Commands:
+(  //Spot migration
+  npx sequelize-cli model:generate --name Spot --attributes ownerId:integer,address:string,city:string,state:string,country:string,lat:decimal,lng:decimal,name:string,description:string,price:integer,avgRating:float,previewImage:string
+  //Seeder
+  npx sequelize-cli seed:generate --name demoSpot
+
+
+  //SpotImage migration
+  npx sequelize-cli model:generate --name SpotImage --attributes spotId:integer,preview:boolean,url:string
+  //Seeder
+  npx sequelize-cli seed:generate --name demoSpotImage
+
+  //Review migration
+  npx sequelize-cli model:generate --name Reviews --attributes userId:integer,spotId:integer,review:text,stars:integer
+  //Seeder
+  npx sequelize-cli seed:generate --name demoReview
+
+  //ReviewImage
+  npx sequelize-cli model:generate --name ReviewImage --attributes reviewId:integer,url:string
+  //Seeder
+  npx sequelize-cli seed:generate --name demoReviewImage
+
+  //Booking
+  npx sequelize-cli model:generate --name Booking --attributes spotId:integer,userId:integer,startDate:date,endDate:date
+  //Seeder
+  npx sequelize-cli seed:generate --name demoBooking
+
+
+  'use strict';
+
+  let options = {};
+  if (process.env.NODE_ENV === 'production') {
+    options.schema = process.env.SCHEMA;  // define your schema in options object
+  }
+
+  /** @type {import('sequelize-cli').Migration} */
+  module.exports = {
+    up: async (queryInterface, Sequelize) => {
+      options.tableName = 'Spots';
+      return queryInterface.bulkInsert(options, [
+        {
+          ownerId: 1,
+          address: "456 Elm Street",
+          city: "Los Angeles",
+          state: "California",
+          country: "United States of America",
+          lat: 34.0522,
+          lng: -118.2437,
+          name: "Coding Dojo",
+          description: "Coding bootcamp for beginners",
+          price: 200,
+        },
+        {
+          ownerId: 2,
+          address: "789 Maple Drive",
+          city: "New York",
+          state: "New York",
+          country: "United States of America",
+          lat: 40.7128,
+          lng: -74.0060,
+          name: "Flatiron School",
+          description: "Coding school for career changers",
+          price: 150,
+        },
+        {
+          ownerId: 3,
+          address: "2468 Oak Avenue",
+          city: "Chicago",
+          state: "Illinois",
+          country: "United States of America",
+          lat: 41.8781,
+          lng: -87.6298,
+          name: "Fullstack Academy",
+          description: "Web development bootcamp",
+          price: 175,
+        }
+      ], {});
+    },
+
+    down: async (queryInterface, Sequelize) => {
+      options.tableName = 'Spots'
+      const Op = Sequelize.Op;
+      return queryInterface.bulkDelete(options, null, {})
+    }
+  };
+
+
+
+
+  'use strict';
+
+  let options = {};
+  if (process.env.NODE_ENV === 'production') {
+    options.schema = process.env.SCHEMA;  // define your schema in options object
+  }
+
+  /** @type {import('sequelize-cli').Migration} */
+  module.exports = {
+    up: async (queryInterface, Sequelize) => {
+      options.tableName = 'Reviews';
+      return queryInterface.bulkInsert(options, [
+        {
+          userId: 1,
+          spotId: 1,
+          review: 'This was an awesome spot!',
+          stars: 4
+        },
+        {
+          userId: 2,
+          spotId: 2,
+          review: 'Great location and amenities.',
+          stars: 4
+        },
+        {
+          userId: 3,
+          spotId: 3,
+          review: 'Could be cleaner, but overall a good experience.',
+          stars: 3
+        }
+      ], {})
+    },
+
+    down: async (queryInterface, Sequelize) => {
+      options.tableName = 'Reviews'
+      const Op = Sequelize.Op
+      return queryInterface.bulkDelete(options, null, {})
+    }
+  };)
+
+Frontend Commands:
+
+npx create-react-app . --template @appacademy/react-v17 --use-npm
