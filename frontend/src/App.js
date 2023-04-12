@@ -7,6 +7,9 @@ import * as sessionActions from "./store/session";
 import Navigation from "./components/Navigation";
 import SpotsIndex from './components/SpotsIndex/index.js';
 import SpotDetails from './components/SpotDetails/SpotDetails';
+import CreateSpot from './components/CreateSpot/CreateSpot';
+import EditSpot from './components/EditSpot/EditSpot';
+import ManageSpots from './components/ManageSpots/ManageSpots';
 
 function App() {
   const dispatch = useDispatch();
@@ -21,7 +24,10 @@ function App() {
       {isLoaded && (
         <Switch>
                     <Route exact path ="/" component={SpotsIndex} />
+                    <Route exact path="/spots/current" component={ManageSpots} />
                     <Route exact path="/spots/:spotId" component={SpotDetails} />
+                    <Route path="/spots/new" component={CreateSpot} />
+                    <Route path="/spots/:spotId/edit" component={EditSpot} />
         </Switch>
       )}
     </>

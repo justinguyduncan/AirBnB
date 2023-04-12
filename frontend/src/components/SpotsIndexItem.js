@@ -11,22 +11,27 @@ const SpotsIndexItem = ({ spot, previewImage }) => {
           style={{
             backgroundImage: `url(${previewImage})`,
             cursor: "pointer",
-            borderRadius: "12px",
+            borderRadius: "12px, 12px, 0, 0 ",
           }}
           title={spot.name}
           data-name={spot.name}
         ></div>
       </Link>
-      <span className="spot-info">
-        {spot.city}, {spot.state}{" "}
-        {spot?.avgRating && (
-          <i className="fa-solid fa-star"> {spot.avgRating.toFixed(1)}</i>
-        )}
-      </span>
-      <p>${spot.price} night</p>
+      <div className="spot-details">
+        <div className="spot-info-wrapper">
+          <span className="spot-info">
+            {spot.city}, {spot.state}
+          </span>
+          {spot?.avgRating && (
+            <span className="spot-rating">
+              <div className="fa-solid fa-star"> {spot.avgRating.toFixed(1)}</div>
+            </span>
+          )}
+        </div>
+        <p>${spot.price} night</p>
+      </div>
     </li>
   );
-
 };
 
 export default SpotsIndexItem;

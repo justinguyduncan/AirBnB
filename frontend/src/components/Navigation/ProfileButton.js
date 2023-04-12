@@ -52,7 +52,7 @@ function ProfileButton({ user }) {
       <ul className={`profile-dropdown ${showMenu ? "" : "hidden"} bordered`} ref={ulRef}>
         {user ? (
           <div className="profile-info">
-            <div>Hello, {user.username}</div>
+            <div>Hello, {user.firstName}</div>
             {/* <div>{user.firstName}</div> */}
             <div>{user.email}</div>
 

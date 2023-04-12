@@ -13,14 +13,13 @@ import CreateReviewModal from "../CreateReviewModal/CreateReviewModal";
 import "./SpotDetails.css";
 
 
-const SpotDetails = () => {
+const SpotDetails = ({spot}) => {
     const dispatch = useDispatch();
     const history = useHistory();
     const {spotId} = useParams();
     const spots = useSelector(state => state.spots[spotId]);
 
     const reviews = useSelector(state => state.reviews);
-
     const filteredReviews = Object.values(reviews).filter((review) => review?.spotId === spots?.id)
 
     const sessionUser = useSelector(state => state.session.user);
@@ -36,9 +35,12 @@ const SpotDetails = () => {
 
     // Render spot details and its reviews
     useEffect(() => {
-        dispatch(getSpotDetails(spotId))
-        dispatch(getAllReviews(spotId))
-    },[dispatch, spotId])
+        dispatch(getSpotDetails(spotId));
+      }, [dispatch, spotId]);
+
+      useEffect(() => {
+        dispatch(getAllReviews(spotId));
+      }, [dispatch, spotId]);
 
     // Delete Review modals
     const [showModal, setShowModal] = useState(false);
@@ -64,7 +66,7 @@ const SpotDetails = () => {
         openModal();
     }
 
-    console.log(filteredReviews.User)
+    console.log(filteredReviews)
 
     // Add Review Modal
    const handleAddReviewModal = async () => {
@@ -80,8 +82,8 @@ const SpotDetails = () => {
             {spots && (
                 <div>
                     <h2 className="detail-spot-name">{spots.name}</h2>
-                    <p className="spot-location">{spots.city}, {spots.state}, {spots.country}</p>
                     <img src={spots.previewImage}/>
+                    <p className="spot-location">{spots.city}, {spots.state}, {spots.country}</p>
 
                     <h2 className="detail-host">Hosted By {spots.User?.firstName} {spots.User?.lastName}</h2>
                     <p>{spots.description}</p>
