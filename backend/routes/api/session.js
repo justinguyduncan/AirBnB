@@ -63,7 +63,7 @@ const validateLogin = [
         return res.json({
           user: user.toSafeObject()
         });
-      } else return res.json({user});
+      } else return res.json({});
     }
   );
 

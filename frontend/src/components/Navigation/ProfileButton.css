@@ -1,0 +1,104 @@
+/* PROFILE BUTTON */
+button.profile-button {
+  border: 1px solid #c1c1c1;
+  border-radius: 20px;
+  padding: 8px 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  right: 30px;
+  top: 10px;
+  cursor: pointer;
+  background-color: #fff;
+  color: #333;
+  font-size: 16px;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+  button.profile-button:hover {
+    background-color: #f6f6f6;
+  }
+
+  button.profile-button:focus {
+    outline: none;
+  }
+
+  button.profile-button::before {
+    content: "\f007";
+    font-family: "Font Awesome 5 Free";
+    font-weight: 900;
+    font-size: 18px;
+    margin-right: 8px;
+  }
+
+  .profile-dropdown {
+    position: absolute;
+    right: 20px;
+    border: 1px solid #c1c1c1;
+    background-color: #fff;
+    z-index: 999;
+    width: 250px;
+    padding: 10px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+
+  .profile-dropdown ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .profile-dropdown li {
+    margin: 10px 0;
+  }
+
+  .profile-dropdown a {
+    display: block;
+    color: #333;
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+
+  .profile-dropdown a:hover {
+    color: #FF5A5F;
+  }
+
+  .profile-info {
+    font-family: Arial;
+    font-size: 16px;
+  }
+
+  .logout-button {
+    background-color: #FF5A5F;
+    color: #fff;
+    border-radius: 20px;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-top: 20px;
+  }
+
+  .logout-button:hover {
+    background-color: #e2494d;
+  }
+
+  .profile-button-options {
+    font-family: cursive;
+    cursor: pointer;
+  }
+
+  .profile-button-options:hover {
+    color: #FF5A5F;
+  }
+

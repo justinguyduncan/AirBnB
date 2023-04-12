@@ -1,0 +1,111 @@
+img{
+  display: flex;
+
+}
+.add-review-button {
+    color: white;
+    background-color: gray;
+    border: 3px solid black;
+    padding: 10px 10px;
+    cursor: pointer;
+    box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.8);
+    height: 40px;
+    width: 150px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: Arial;
+  }
+
+  .spot-location {
+    font-size: large;
+    font-weight: bold;
+    font-family: Arial;
+  }
+
+  .reserve-container-wrapper {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    position: relative;
+    bottom: 90px;
+  }
+
+  .reserve-container {
+    font-family: cursive;
+    border: 4px solid black;
+    border-radius: 15px;
+    align-items: center;
+    padding: 50px;
+    width: 18%;
+    height: auto;
+    max-height: 100px;
+    margin-right: 10px;
+    transform: translateX(1400px);
+    font-family: Arial;
+  }
+
+  .reserve-info {
+    font-size: 24px;
+    font-weight: bold;
+    font-family: Arial;
+  }
+
+  .reserve-button {
+    background-color: #FF5A5F;
+    border: 3px solid black;
+    color: white;
+    padding: 3px 10px;
+    font-size: 16px;
+    cursor: pointer;
+    box-shadow: 3px 3px 0px rgba(0, 0, 0, 1);
+    width: 100%;
+    height: 50px;
+    margin-top: 15px;
+    font-family: Arial;
+  }
+
+  .detail-review-delete {
+    font-size: 15px;
+    font-family: cursive;
+    color: white;
+    background-color: gray;
+    border: 3px solid black;
+    padding: 10px 10px;
+    cursor: pointer;
+    box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.8);
+    height: 40px;
+    width: 150px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: Arial;
+  }
+
+  .detail-spot-name,
+  .detail-host {
+    font-family: cursive;
+    font-family: Arial;
+  }
+
+  h2 {
+    font-family: cursive;
+    font-family: Arial;
+  }
+
+  .add-review-modal-button {
+    font-size: 15px;
+    font-family: cursive;
+    color: white;
+    background-color: gray;
+    border: 3px solid black;
+    padding: 10px 10px;
+    cursor: pointer;
+    box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.8);
+    height: 40px;
+    width: 150px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: Arial;
+  }
