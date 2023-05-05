@@ -1,24 +1,25 @@
 .spots-container {
   display: flex;
-  justify-content: left;
+  justify-content: center;
   padding: 20px;
 }
 
-.spots-list {
-  display: block;
+.spot-list {
+  display: flex;
   flex-wrap: wrap;
-  justify-content: left;
+  justify-content: space-between; /* adjust the justify-content property to fill the entire container */
   list-style: none;
   padding: 0;
   margin: 0;
+  width: 100%; /* increase the width to fill the entire container */
 }
 
 .spot-card {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  width: calc(25% - 30px);
-  height: 300px;
+  width: calc(33.3% - 30px); /* adjust the width to fit three cards in a row */
+  height: 400px; /* increase the height to match the taller images */
   margin: 0 15px 30px;
   border-radius: 12px;
   position: relative;
@@ -28,17 +29,21 @@
 
 .spot-image-wrapper {
   width: 100%;
-  height: 0;
-  padding-bottom: 56.25%;
-  position: relative;
-  background-size: cover;
-  background-position: center center;
+  height: 200px; /* increase the height to make the images taller */
   border-radius: 12px 12px 0 0;
   overflow: hidden;
 }
 
+.spot-image-wrapper img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+
 .spot-details {
   display: flex;
+  justify-content: left;
   flex-direction: column;
   padding: 16px;
   width: 100%;
@@ -46,7 +51,7 @@
 
 .spot-info-wrapper {
   display: flex;
-  justify-content: space-between;
+  justify-content: left;
   font-size: 14px;
 }
 
@@ -60,49 +65,4 @@
   align-items: right;
   font-size: 18px;
   font-weight: 600;
-}
-
-
-@media screen and (max-width: 1200px) {
-  .spot-card {
-    width: calc(33.33% - 30px);
-  }
-}
-
-@media screen and (max-width: 992px) {
-  .spot-card {
-    width: calc(50% - 20px);
-  }
-}
-
-@media screen and (max-width: 768px) {
-  .spot-card {
-    width: calc(50% - 20px);
-    height: 250px;
-  }
-  .spot-info-wrapper {
-    font-size: 12px;
-  }
-  .spot-price {
-    font-size: 16px;
-  }
-  .spot-rating {
-    font-size: 16px;
-  }
-}
-
-@media screen and (max-width: 576px) {
-  .spot-card {
-    width: 100%;
-    height: 200px;
-  }
-  .spot-info-wrapper {
-    font-size: 10px;
-  }
-  .spot-price {
-    font-size: 14px;
-  }
-  .fa-star {
-    margin-right: 3px;
-  }
 }
