@@ -18,7 +18,7 @@ function Navigation({ isLoaded }) {
     sessionLinks = (
       <>
         <li>
-          <Link to="/create-spot">Create a Spot</Link> {/* Use Link component */}
+          <Link to="/spots/new">Create a Spot</Link> {/* Use Link component */}
         </li>
         <li>
           <ProfileButton user={sessionUser} />
