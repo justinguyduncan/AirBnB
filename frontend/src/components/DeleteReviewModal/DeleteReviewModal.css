@@ -9,6 +9,7 @@
   align-items: center;
   justify-content: center;
   height: 100%;
+  padding: 5%;
 }
 
 .delete-review-buttons {

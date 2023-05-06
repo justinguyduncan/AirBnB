@@ -14,7 +14,8 @@ const DeleteReviewModal = ({reviewId, spotId}) => {
         e.preventDefault();
         await dispatch(deleteReview(reviewId));
         await dispatch(getSpotDetails(spotId));
-        await dispatch(getAllReviews(spotId))
+        await dispatch(getAllReviews(spotId));
+        history.go(`/spots/${spotId}`);
         closeModal();
     }
 

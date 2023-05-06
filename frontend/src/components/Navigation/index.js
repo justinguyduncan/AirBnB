@@ -50,7 +50,7 @@ function Navigation({ isLoaded }) {
         </Link>
       </li>
       {isLoaded && sessionLinks}
-    </ul>
+      </ul>
   );
 }
 
