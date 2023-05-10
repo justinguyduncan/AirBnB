@@ -91,3 +91,13 @@
     padding: 0;
 
   }
+  .create-spot {
+    background-color: #FF5A5F;
+    color: white;
+    font-size: 16px;
+    padding: 5px 10px;
+    border: none;
+    border-radius: 5px;
+    margin-top: 20px;
+    cursor: pointer;
+  }

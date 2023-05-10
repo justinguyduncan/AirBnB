@@ -17,9 +17,10 @@ function Navigation({ isLoaded }) {
   if (sessionUser) {
     sessionLinks = (
       <>
-        <li>
+        <div className='create-spot-button'><li>
           <Link to="/spots/new">Create a Spot</Link> {/* Use Link component */}
         </li>
+        </div>
         <li>
           <ProfileButton user={sessionUser} />
         </li>
