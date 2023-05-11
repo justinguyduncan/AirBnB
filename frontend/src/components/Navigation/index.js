@@ -17,12 +17,12 @@ function Navigation({ isLoaded }) {
   if (sessionUser) {
     sessionLinks = (
       <>
-        <li>
-        <div className='create-spot-button'>
-          <Link to="/spots/new">Create a Spot</Link> {/* Use Link component */}
-        </div>
+        <ul>
+          <NavLink to="/spots/new" className="create-spot-button">
+            Create a Spot
+          </NavLink>
           <ProfileButton user={sessionUser} />
-        </li>
+        </ul>
       </>
     );
   } else {
@@ -43,14 +43,13 @@ function Navigation({ isLoaded }) {
   }
 
   return (
-    <ul>
-      <li>
-        <Link exact to="/"> {/* Use Link component */}
-          <AirbnbLogo />
-        </Link>
-      </li>
-      {isLoaded && sessionLinks}
-      </ul>
+    <nav>
+      <Link to="/">
+        <AirbnbLogo />
+      </Link>
+        {isLoaded && sessionLinks}
+
+    </nav>
   );
 }
 
