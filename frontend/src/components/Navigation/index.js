@@ -15,6 +15,8 @@ function Navigation({ isLoaded }) {
 
   let sessionLinks;
   if (sessionUser) {
+
+  console.log(sessionUser)
     sessionLinks = (
       <>
         <ul>
