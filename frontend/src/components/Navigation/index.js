@@ -8,21 +8,22 @@ import LoginFormModal from '../LoginFormModal';
 import SignupFormModal from '../SignupFormModal';
 import './Navigation.css';
 import AirbnbLogo from './logo';
-import CreateSpot from '../CreateSpot/CreateSpot'; // import CreateSpot component here
 
 function Navigation({ isLoaded }) {
   const sessionUser = useSelector(state => state.session.user);
 
   let sessionLinks;
   if (sessionUser) {
+
+  console.log(sessionUser)
     sessionLinks = (
       <>
-        <li>
-          <Link to="/create-spot">Create a Spot</Link> {/* Use Link component */}
-        </li>
-        <li>
+        <ul>
+          <NavLink to="/spots/new" className="create-spot-button">
+            Create a Spot
+          </NavLink>
           <ProfileButton user={sessionUser} />
-        </li>
+        </ul>
       </>
     );
   } else {
@@ -43,14 +44,13 @@ function Navigation({ isLoaded }) {
   }
 
   return (
-    <ul>
-      <li>
-        <Link exact to="/"> {/* Use Link component */}
-          <AirbnbLogo />
-        </Link>
-      </li>
-      {isLoaded && sessionLinks}
-    </ul>
+    <nav>
+      <Link to="/">
+        <AirbnbLogo />
+      </Link>
+        {isLoaded && sessionLinks}
+
+    </nav>
   );
 }
 

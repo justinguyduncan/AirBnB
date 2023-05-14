@@ -25,9 +25,9 @@ function App() {
         <Switch>
                     <Route exact path ="/" component={SpotsIndex} />
                     <Route exact path="/spots/current" component={ManageSpots} />
-                    <Route exact path="/spots/:spotId" component={SpotDetails} />
                     <Route path="/spots/new" component={CreateSpot} />
                     <Route path="/spots/:spotId/edit" component={EditSpot} />
+                    <Route exact path="/spots/:spotId" component={SpotDetails} />
         </Switch>
       )}
     </>

@@ -23,7 +23,7 @@ module.exports = {
     },
     {
       spotId: 3,
-      preview: false,
+      preview: true,
       url: 'https://media.istockphoto.com/id/1303750117/photo/modern-real-estate-front-exterior-blue-and-white-color-scheme-with-landscaping.jpg?s=1024x1024&w=is&k=20&c=krUQXH4mn7HljWpKSw8dzQ956Gdh3gfpMG2cQooMgD0=',
 
     },

@@ -371,6 +371,7 @@ router.delete('/:spotId', requireAuth, async (req, res) => {
 
 //Create a Review For a Spot based on spotId
 router.post('/:spotId/reviews', requireAuth, validateReview, async (req, res) => {
+  const {id, firstName, lastName} = req.user
   const { review, stars } = req.body;
 
     // Check if the spot exists
@@ -400,22 +401,24 @@ router.post('/:spotId/reviews', requireAuth, validateReview, async (req, res) =>
     const newReview = await Review.create({
       review,
       stars,
-      userId: req.user.id,
+      userId: id,
       spotId: req.params.spotId
     });
 
     // Get the created review data including createdAt and updatedAt
-    const createdReview = await Review.findByPk(newReview.id, {
-      attributes: [
-        'id',
-        'userId',
-        'spotId',
-        'review',
-        'stars',
-        'createdAt',
-        'updatedAt'
-      ]
-    });
+    // const createdReview = await Review.findByPk(newReview.id, {
+    //   attributes: [
+    //     'id',
+    //     'userId',
+    //     'spotId',
+    //     'review',
+    //     'stars',
+    //     'createdAt',
+    //     'updatedAt'
+    //   ]
+    // });
+
+    res.status(201).json({User: {id, firstName, lastName}, id: newReview.id, review: newReview.review, stars: newReview.stars, createdAt: newReview.createdAt, updatedAt: newReview.updatedAt})
 
     return res.json(createdReview);
 });

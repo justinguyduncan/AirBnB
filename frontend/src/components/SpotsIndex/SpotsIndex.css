@@ -1,35 +1,35 @@
 .spots-container {
-  display: flex;
-  justify-content: center;
+  max-width: 1600px;
+  margin: 0 auto;
   padding: 20px;
 }
 
-.spot-list {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between; /* adjust the justify-content property to fill the entire container */
+.spots-list {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-gap: 30px;
   list-style: none;
-  padding: 0;
   margin: 0;
-  width: 100%; /* increase the width to fill the entire container */
+  padding: 0;
 }
 
 .spot-card {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  width: calc(33.3% - 30px); /* adjust the width to fit three cards in a row */
-  height: 400px; /* increase the height to match the taller images */
-  margin: 0 15px 30px;
+  width: 400px;
+  height: 425px;
+  margin-bottom: 30px;
   border-radius: 12px;
-  position: relative;
-  box-sizing: border-box;
-  background-color: #ffffff;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .spot-image-wrapper {
+  position: relative;
   width: 100%;
-  height: 200px; /* increase the height to make the images taller */
+  padding-bottom: 75%;
+  background-size: cover;
+  background-position: center;
   border-radius: 12px 12px 0 0;
   overflow: hidden;
 }
@@ -40,29 +40,28 @@
   object-fit: cover;
 }
 
-
 .spot-details {
   display: flex;
-  justify-content: left;
   flex-direction: column;
   padding: 16px;
   width: 100%;
 }
 
 .spot-info-wrapper {
-  display: flex;
   justify-content: left;
   font-size: 14px;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: bold;
 }
 
-.spot-price {
+.spot-price,
+.star-rating {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: bold;
   font-size: 18px;
   font-weight: 600;
 }
 
-.spot-rating {
-  display: flex;
-  align-items: right;
-  font-size: 18px;
-  font-weight: 600;
+.star-rating {
+  justify-content: flex-end;
 }
