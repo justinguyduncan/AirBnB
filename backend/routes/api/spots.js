@@ -420,7 +420,7 @@ router.post('/:spotId/reviews', requireAuth, validateReview, async (req, res) =>
 
     res.status(201).json({User: {id, firstName, lastName}, id: newReview.id, review: newReview.review, stars: newReview.stars, createdAt: newReview.createdAt, updatedAt: newReview.updatedAt})
 
-    return res.json(createdReview);
+    return res.json();
 });
 
 

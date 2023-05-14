@@ -65,7 +65,7 @@ router.get('/current', requireAuth, async (req, res) => {
           spotId: spot.id,
           Spot: {
             id: spot.id,
-            ownerId: spot.ownerId,
+            ownerId: nerId,
             address: spot.address,
             city: spot.city,
             state: spot.state,
@@ -107,7 +107,7 @@ router.get('/current', requireAuth, async (req, res) => {
       return res.status(404).json({ message: "Booking couldn't be found", statusCode: 404 });
     }
 
-    if (updateBooking.userId !== req.user.id && updateBooking.Spot.ownerId !== req.user.id) {
+    if (updateBooking.userId !== req.user.id && updateBooking.nerId !== req.user.id) {
         return res.status(403).json({ message: "Forbidden", statusCode: 403 });
       }
 
@@ -173,7 +173,7 @@ router.delete('/:bookingId', requireAuth, async (req, res) => {
           return res.status(404).json({ message: "Booking couldn't be found", statusCode: 404 });
         }
 
-     if (deleteBooking.userId !== req.user.id && deleteBooking.Spot.ownerId !== req.user.id) {
+     if (deleteBooking.userId !== req.user.id && deleteBooking.nerId !== req.user.id) {
           return res.status(403).json({ message: "Forbidden", statusCode: 403 });
         }
 
