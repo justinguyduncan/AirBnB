@@ -8,7 +8,6 @@ import LoginFormModal from '../LoginFormModal';
 import SignupFormModal from '../SignupFormModal';
 import './Navigation.css';
 import AirbnbLogo from './logo';
-import CreateSpot from '../CreateSpot/CreateSpot'; // import CreateSpot component here
 
 function Navigation({ isLoaded }) {
   const sessionUser = useSelector(state => state.session.user);

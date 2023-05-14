@@ -6,16 +6,12 @@ import { getSpotDetails, deleteSpot } from "../../store/spots";
 import { useModal } from "../../context/Modal";
 import { getAllReviews} from "../../store/reviews";
 import DeleteReviewModal from "../DeleteReviewModal/DeleteReviewModal";
-import DeleteSpotModal from "../DeleteSpotModal/DeleteSpotModal";
-import OpenModalMenuItem from "../Navigation/OpenModalMenuItem";
-import CreateReview from "../CreateReview/CreateReview";
 import CreateReviewModal from "../CreateReviewModal/CreateReviewModal";
 import "./SpotDetails.css";
 
 
 const SpotDetails = ({spot}) => {
     const dispatch = useDispatch();
-    const history = useHistory();
     const {spotId} = useParams();
     const spots = useSelector(state => state.spots[spotId]);
 
