@@ -1,7 +1,30 @@
-img{
+.image-container {
+  padding: 0 50px;
   display: flex;
-
+  align-items: center;
+  justify-content: center;
+  height: 619px;
 }
+
+.main-image img {
+  width: 90%; /* Adjust the width as needed */
+  height: 100%; /* Adjust the height as needed */
+  margin-right: 10px; /* Adjust the spacing between the main image and the grid */
+}
+
+.grid-container {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  width: 45%; /* Adjust the width as needed */
+}
+
+.grid-item{
+  display: flex;
+  height: 309.5px;
+  width: auto;
+  padding: 5px;
+}
+
 .add-review-button {
     color: white;
     background-color: gray;
@@ -14,13 +37,14 @@ img{
     display: flex;
     justify-content: center;
     align-items: center;
-    font-family: Arial;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: bold;
   }
 
   .spot-location {
     font-size: large;
+    font-family: 'Montserrat', sans-serif;
     font-weight: bold;
-    font-family: Arial;
   }
 
   .reserve-container-wrapper {
@@ -32,7 +56,6 @@ img{
   }
 
   .reserve-container {
-    font-family: cursive;
     border: 4px solid black;
     border-radius: 15px;
     align-items: center;
@@ -47,10 +70,21 @@ img{
 
   .reserve-info {
     font-size: 24px;
+    font-family: 'Montserrat', sans-serif;
     font-weight: bold;
-    font-family: Arial;
+    display: flex;
+    justify-content: space-between; /* Spread the items apart */
+    align-items: center;
   }
 
+  .reserve-rating {
+    display: flex;
+    align-items: center;
+  }
+
+  .reserve-rating i {
+    margin-right: 5px; /* Adjust the margin as needed */
+  }
   .reserve-button {
     background-color: #FF5A5F;
     border: 3px solid black;
@@ -62,7 +96,8 @@ img{
     width: 100%;
     height: 50px;
     margin-top: 15px;
-    font-family: Arial;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: bold;
   }
 
   .detail-review-delete {
@@ -79,18 +114,19 @@ img{
     display: flex;
     justify-content: center;
     align-items: center;
-    font-family: Arial;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: bold;
   }
 
   .detail-spot-name,
   .detail-host {
-    font-family: cursive;
-    font-family: Arial;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: bold;
   }
 
   h2 {
-    font-family: cursive;
-    font-family: Arial;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: bold;
   }
 
   .add-review-modal-button {
@@ -107,5 +143,6 @@ img{
     display: flex;
     justify-content: center;
     align-items: center;
-    font-family: Arial;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: bold;
   }

@@ -50,10 +50,14 @@
 .spot-info-wrapper {
   justify-content: left;
   font-size: 14px;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: bold;
 }
 
 .spot-price,
 .star-rating {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: bold;
   font-size: 18px;
   font-weight: 600;
 }

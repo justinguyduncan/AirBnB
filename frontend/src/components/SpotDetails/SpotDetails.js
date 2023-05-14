@@ -66,7 +66,7 @@ const SpotDetails = ({spot}) => {
         openModal();
     }
 
-    console.log(filteredReviews)
+    // console.log(filteredReviews)
 
     // Add Review Modal
    const handleAddReviewModal = async () => {
@@ -75,17 +75,55 @@ const SpotDetails = ({spot}) => {
     openModal();
    }
 
+   const handleReserveClick = () => {
+    alert("Feature coming soon!");
+  };
+
+  const reviewCount = filteredReviews.length;
+let reviewText = "";
+
+if (reviewCount === 0) {
+  reviewText = " New ";
+} else if (reviewCount === 1) {
+  reviewText = " 1 Review";
+} else if (reviewCount === 2) {
+  reviewText = " 2 Reviews";
+} else {
+  reviewText = `${reviewCount} Reviews`;
+}
 
     return (
+<div>
+    {spots && spots.Owner && (
+      <div>
+        <h2 className="detail-spot-name">{spots.name}</h2>
+        <p className="spot-location">{spots.city}, {spots.state}, {spots.country}</p>
+        <div className="image-container">
+  {spots.SpotImages && spots.SpotImages.length > 0 && (
+    <>
+      <div className="main-image">
+        <img src={spots.SpotImages[0].url} alt="Spot Preview" />
+      </div>
+      <div className="grid-container">
+        <div className="grid-item">
+          <img src={spots.SpotImages[0].url} alt="Spot Preview" />
+        </div>
+        <div className="grid-item">
+          <img src={spots.SpotImages[0].url} alt="Spot Preview" />
+        </div>
+        <div className="grid-item">
+          <img src={spots.SpotImages[0].url} alt="Spot Preview" />
+        </div>
+        <div className="grid-item">
+          <img src={spots.SpotImages[0].url} alt="Spot Preview" />
+        </div>
+      </div>
+    </>
+  )}
+</div>
 
-        <div>
-            {spots && (
-                <div>
-                    <h2 className="detail-spot-name">{spots.name}</h2>
-                    <img src={spots.previewImage}/>
-                    <p className="spot-location">{spots.city}, {spots.state}, {spots.country}</p>
 
-                    <h2 className="detail-host">Hosted By {spots.User?.firstName} {spots.User?.lastName}</h2>
+                    <h2 className="detail-host">Hosted By {spots.Owner?.firstName} {spots.Owner?.lastName}</h2>
                     <p>{spots.description}</p>
 
                     <div className="reserve-container-wrapper">
@@ -93,18 +131,22 @@ const SpotDetails = ({spot}) => {
                         <div className="reserve-container">
 
                         <div className="reserve-info">
-                        ${spots.price} night
-                        {spots?.avgRating && (
-                            <>
-                            <i className="fa-solid fa-star"></i>
-                            <span>{spots.avgRating.toFixed(1)}</span>
-                            </>
+                        <span>${spots.price} night</span>
+                             <div className="reserve-rating">
+                               {spots?.avgRating !== 0.0 && (
+                                  <>
+                                    <i className="fa-solid fa-star"> </i>
+                                    <span> {spots.avgRating.toFixed(1) } </span> ·
+                                 </>
                                 )}
-                            ({filteredReviews.length === 1 ? "1 Review" : `${filteredReviews.length} Reviews`})
-                        </div>
+                               {reviewText}
+                              </div>
+                            </div>
 
                         <div>
-                            <button className="reserve-button">Reserve</button>
+                        <button className="reserve-button" onClick={handleReserveClick}>
+                             Reserve
+                        </button>
                         </div>
                     </div>
 
@@ -112,10 +154,27 @@ const SpotDetails = ({spot}) => {
                     <hr style={{borderWidth: "1px", borderColor: "black"}}/>
 
                     <div>
-                        <h2> <i className="fa-solid fa-star"></i> {filteredReviews.length === 1 ? "Review" : "Reviews"} ({filteredReviews.length === 0 ? "New" : filteredReviews.length})</h2>
+
+                    <h2>
+                        <i className="fa-solid fa-star">  </i>
+                     {spots.avgRating !== 0.0 && (
+                       <>
+                         <span>{spots.avgRating.toFixed(1)}</span> ·
+                       </>
+                     )}
+                     {reviewText}
+                    </h2>
+                        <button
+                        onClick={handleAddReviewModal}
+                        className="add-review-modal-button"
+                        disabled={!sessionUser || hasUserReviewed || isCurrentUserHost}
+
+                        >Post Your Review</button>
+
+
                             {filteredReviews && (filteredReviews).map(review => (
                             <div key={review?.id}>
-                            <p>{review?.User.firstName}</p>
+                            <p>{review?.User.firstName} {review.User.lastName}</p>
                             <p>{review?.review}</p>
                             <p>{review?.stars} stars</p>
 
@@ -142,12 +201,7 @@ const SpotDetails = ({spot}) => {
                         {/* {sessionUser && spotId && (
                             <CreateReviewModal spotId={spotId} />
                         )} */}
-                        <button
-                        onClick={handleAddReviewModal}
-                        className="add-review-modal-button"
-                        disabled={!sessionUser || hasUserReviewed || isCurrentUserHost}
 
-                        >Post Your Review</button>
                     </div>
 
 
