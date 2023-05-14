@@ -406,21 +406,21 @@ router.post('/:spotId/reviews', requireAuth, validateReview, async (req, res) =>
     });
 
     // Get the created review data including createdAt and updatedAt
-    // const createdReview = await Review.findByPk(newReview.id, {
-    //   attributes: [
-    //     'id',
-    //     'userId',
-    //     'spotId',
-    //     'review',
-    //     'stars',
-    //     'createdAt',
-    //     'updatedAt'
-    //   ]
-    // });
+    const createdReview = await Review.findByPk(newReview.id, {
+      attributes: [
+        'id',
+        'userId',
+        'spotId',
+        'review',
+        'stars',
+        'createdAt',
+        'updatedAt'
+      ]
+    });
 
-    res.status(201).json({User: {id, firstName, lastName}, id: newReview.id, review: newReview.review, stars: newReview.stars, createdAt: newReview.createdAt, updatedAt: newReview.updatedAt})
+    //res.status(201).json({User: {id, firstName, lastName}, id: newReview.id, review: newReview.review, stars: newReview.stars, createdAt: newReview.createdAt, updatedAt: newReview.updatedAt})
 
-    return res.json();
+    return res.json(createdReview);
 });
 
 
