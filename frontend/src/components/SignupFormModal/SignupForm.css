@@ -1,0 +1,10 @@
+
+
+  .sign-up-button:disabled {
+    pointer-events: none; /* Disable pointer events on disabled button */
+    opacity: 0.5; /* Reduce opacity to indicate disabled state */
+  }
+
+  .sign-up-button:disabled:hover {
+    cursor: default; /* Disable cursor change on hover */
+  }

@@ -18,8 +18,19 @@ function SignupFormModal() {
   const { closeModal } = useModal();
 
   useEffect(() => {
-    setIsButtonDisabled(username.length < 4 || password.length < 6 || password !== confirmPassword);
-  }, [username, password, confirmPassword]); // new useEffect hook
+    setIsButtonDisabled(
+      email === "" ||
+      username === "" ||
+      firstName === "" ||
+      lastName === "" ||
+      password === "" ||
+      confirmPassword === ""
+    );
+  }, [email, username, firstName, lastName, password, confirmPassword]);
+
+  // useEffect(() => {
+  //   setIsButtonDisabled(username.length < 4 || password.length < 6 || password !== confirmPassword);
+  // }, [username, password, confirmPassword]); // new useEffect hook
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -113,7 +124,9 @@ function SignupFormModal() {
             required
           />
         </label>
-        <button type="submit" disabled={isButtonDisabled}>Sign Up</button>
+        <button className="sign-up-button" type="submit" disabled={isButtonDisabled}>
+  Sign Up
+</button>
       </form>
     </>
   );
