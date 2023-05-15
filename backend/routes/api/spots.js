@@ -284,10 +284,7 @@ router.get('/current', async (req, res) => {
         },
         {
           model: Review,
-          attributes: [
-            [Sequelize.fn('COUNT', Sequelize.col('*')), 'numReviews'],
-            [Sequelize.fn('AVG', Sequelize.col('Reviews.stars')), 'avgRating']
-          ],
+          attributes: ['id', 'userId', 'stars'],
           include: [
             {
               model: Spot,
@@ -304,6 +301,10 @@ router.get('/current', async (req, res) => {
       return res.status(404).json({ message: 'Spot not found.', statusCode: 404 });
     }
 
+    // Calculate numReviews and avgRating
+    const numReviews = spot.Reviews.length;
+    const avgRating = spot.Reviews.reduce((acc, review) => acc + review.stars, 0) / numReviews;
+
     res.json({
       id: spot.id,
       ownerId: spot.ownerId,
@@ -318,8 +319,8 @@ router.get('/current', async (req, res) => {
       price: spot.price,
       createdAt: spot.createdAt,
       updatedAt: spot.updatedAt,
-      numReviews: spot.Reviews.length > 0 ? spot.Reviews[0].dataValues.numReviews : 0,
-      avgRating: spot.Reviews.length > 0 ? spot.Reviews[0].dataValues.avgRating : 0,
+      numReviews: numReviews,
+      avgRating: numReviews > 0 ? avgRating : 0,
       SpotImages: spot.SpotImages,
       Owner: spot.User
     });
