@@ -1,157 +1,137 @@
 .image-container {
-  padding: 0 50px;
+  padding: 0 20px;
   display: flex;
   align-items: center;
   justify-content: center;
-  height: auto
+  height: auto;
 }
 
 .main-image img {
   display: flex;
-  width: auto; /* Adjust the width as needed */
-  height: 100%; /* Adjust the height as needed */
-  margin-right: 10px; /* Adjust the spacing between the main image and the grid */
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  border-radius: 12px;
+  margin-right: 10px;
 }
 
 .grid-container {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  width: 45%; /* Adjust the width as needed */
+  gap: 10px;
+  width: 100%;
 }
 
-.grid-item{
+.grid-item {
   display: flex;
-  height: 309.5px;
-  width: auto;
+  height: 200px;
+  width: 100%;
   padding: 5px;
 }
 
-.add-review-button {
-    color: white;
-    background-color: gray;
-    border: 3px solid black;
-    padding: 10px 10px;
-    cursor: pointer;
-    box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.8);
-    height: 40px;
-    width: 150px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-family: 'Montserrat', sans-serif;
-    font-weight: bold;
-  }
+.spot-details-reserve-container-wrapper {
+  display: flex;
+  justify-content: flex-end;
+}
 
-  .spot-location {
-    font-size: large;
-    font-family: 'Montserrat', sans-serif;
-    font-weight: bold;
-  }
+.reserve-container {
+  border: 4px solid black;
+  border-radius: 15px;
+  align-items: right;
+  padding: 50px;
+  height: auto;
+  max-height: 100px;
+  font-family: Arial;
+  justify-content: right;
+  width: 400px;
+}
 
-  .reserve-container-wrapper {
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
-    position: relative;
-    bottom: 90px;
-  }
+.reserve-info {
+  font-size: 24px;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: bold;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
 
-  .reserve-container {
-    border: 4px solid black;
-    border-radius: 15px;
-    align-items: center;
-    padding: 50px;
-    width: 18%;
-    height: auto;
-    max-height: 100px;
-    margin-right: 10px;
-    transform: translateX(1400px);
-    font-family: Arial;
-  }
+.reserve-rating {
+  display: flex;
+  align-items: center;
+}
 
-  .reserve-info {
-    font-size: 24px;
-    font-family: 'Montserrat', sans-serif;
-    font-weight: bold;
-    display: flex;
-    justify-content: space-between; /* Spread the items apart */
-    align-items: center;
-  }
+.reserve-rating i {
+  margin-right: 5px;
+}
 
+.reserve-button {
+  background-color: #FF5A5F;
+  border: 3px solid black;
+  color: white;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  box-shadow: 3px 3px 0px rgba(0, 0, 0, 1);
+  width: 100%;
+  max-width: 200px;
+  height: 50px;
+  margin-top: 15px;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: bold;
+}
 
-  .reserve-rating {
-    display: flex;
-    align-items: center;
-  }
+.detail-review-delete {
+  font-size: 15px;
+  font-family: cursive;
+  color: white;
+  background-color: gray;
+  border: 3px solid black;
+  padding: 10px 20px;
+  cursor: pointer;
+  box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.8);
+  height: 40px;
+  width: 150px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: bold;
+}
 
-  .reserve-rating i {
-    margin-right: 5px; /* Adjust the margin as needed */
-  }
-  .reserve-button {
-    background-color: #FF5A5F;
-    border: 3px solid black;
-    color: white;
-    padding: 3px 10px;
-    font-size: 16px;
-    cursor: pointer;
-    box-shadow: 3px 3px 0px rgba(0, 0, 0, 1);
-    width: 100%;
-    height: 50px;
-    margin-top: 15px;
-    font-family: 'Montserrat', sans-serif;
-    font-weight: bold;
-  }
+.detail-spot-name,
+.detail-host {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: bold;
+}
 
-  .detail-review-delete {
-    font-size: 15px;
-    font-family: cursive;
-    color: white;
-    background-color: gray;
-    border: 3px solid black;
-    padding: 10px 10px;
-    cursor: pointer;
-    box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.8);
-    height: 40px;
-    width: 150px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-family: 'Montserrat', sans-serif;
-    font-weight: bold;
-  }
+h2 {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: bold;
+}
 
-  .detail-spot-name,
-  .detail-host {
-    font-family: 'Montserrat', sans-serif;
-    font-weight: bold;
-  }
+.add-review-modal-button {
+  font-size: 15px;
+  font-family: cursive;
+  color: white;
+  background-color: gray;
+  border: 3px solid black;
+  padding: 10px 20px;
+  cursor: pointer;
+  box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.8);
+  height: 40px;
+  width: 150px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: bold;
+}
 
-  h2 {
-    font-family: 'Montserrat', sans-serif;
-    font-weight: bold;
-  }
+.review-box-shadow {
+  border-radius: 8px;
+  padding: 20px;
+  margin-bottom: 10px;
+  font-family: Arial, sans-serif;
+  font-size: 14px;
+}
 
-  .add-review-modal-button {
-    font-size: 15px;
-    font-family: cursive;
-    color: white;
-    background-color: gray;
-    border: 3px solid black;
-    padding: 10px 10px;
-    cursor: pointer;
-    box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.8);
-    height: 40px;
-    width: 150px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-family: 'Montserrat', sans-serif;
-    font-weight: bold;
-  }
-
-  .review-box-shadow {
-    margin-bottom: 10px;
-    padding: 20px; /* add some padding so the content isn't too close to the edges */
-    max-width: 200px; /* this could be any value that works for your design */
-    margin: left;
-  }

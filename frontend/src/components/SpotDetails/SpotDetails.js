@@ -146,7 +146,7 @@ if (!spotDetails) {
                     <h2 className="detail-host">Hosted By {spots.Owner?.firstName} {spots.Owner?.lastName}</h2>
                     <p>{spots.description}</p>
 
-                    <div className="reserve-container-wrapper">
+                    <div className="spot-details-reserve-container-wrapper">
                     </div>
                         <div className="reserve-container">
 
@@ -184,13 +184,14 @@ if (!spotDetails) {
     )}
     {reviewText}
 </h2>
-<button
-    onClick={handleAddReviewModal}
-    className="add-review-modal-button"
-    disabled={!sessionUser || hasUserReviewed || isCurrentUserHost}
->
-    Post Your Review
-</button>
+{!hasUserReviewed && !isCurrentUserHost && (
+              <button
+                onClick={handleAddReviewModal}
+                className="add-review-modal-button"
+              >
+                Post Your Review
+              </button>
+            )}
 
 {filteredReviews.length === 0 && (
     <h3>Be the first to post a review!</h3>

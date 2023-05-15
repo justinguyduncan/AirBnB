@@ -55,3 +55,12 @@
     font-weight: bold;
 
 }
+
+.submit-review-button[disabled] {
+  pointer-events: none; /* Disable pointer events on disabled button */
+  opacity: 0.5; /* Reduce opacity to indicate disabled state */
+}
+
+.submit-review-button[disabled]:hover {
+  cursor: default; /* Disable cursor change on hover */
+}

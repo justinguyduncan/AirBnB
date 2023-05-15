@@ -22,6 +22,7 @@
   margin-bottom: 30px;
   border-radius: 12px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  cursor: pointer; /* Add this line */
 }
 
 .spot-image-wrapper {
@@ -48,10 +49,13 @@
 }
 
 .spot-info-wrapper {
-  justify-content: left;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   font-size: 14px;
   font-family: 'Montserrat', sans-serif;
   font-weight: bold;
+  padding-right: 25px;
 }
 
 .spot-price,
@@ -64,4 +68,10 @@
 
 .star-rating {
   justify-content: flex-end;
+}
+
+.spot-card a {
+  outline: none;
+  text-decoration: none;
+  color: inherit;
 }

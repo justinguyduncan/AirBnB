@@ -184,7 +184,7 @@ const CreateSpot = ({spot = {}, match}) => {
             {/* <hr className='spot-line-break' /> */}
 
             <label className='spot-label'>
-            <h3>Description</h3>
+            <h3>Describe your place to guests</h3>
                 <textarea
                 className='spot-input'
                 placeholder='Please write at least 30 characters'

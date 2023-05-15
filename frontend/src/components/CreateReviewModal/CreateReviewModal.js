@@ -26,6 +26,11 @@ const CreateReviewModal = ({reviews, spotId }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    if (review.length < 5) {
+      setError("Review must be at least 5 characters long.");
+      return;
+    }
+
     const newReviewInput = {
       ...reviews,
       spotId: spotId,
@@ -78,7 +83,11 @@ const CreateReviewModal = ({reviews, spotId }) => {
 
         <button
         className="submit-review-button"
-        type="submit">Submit Your Review</button>
+        type="submit"
+        disabled={review.length < 5}
+      >
+        Submit Your Review
+      </button>
       </form>
     </>
   );

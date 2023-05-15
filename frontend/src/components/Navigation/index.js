@@ -19,14 +19,14 @@ function Navigation({ isLoaded }) {
 console.log(sessionUser)
   // console.log(sessionUser)
     sessionLinks = (
-      <>
+      <div className='nav-bar-links'>
         <ul>
           <NavLink to="/spots/new" className="create-spot-button">
             Create a Spot
           </NavLink>
           <ProfileButton user={sessionUser} />
         </ul>
-      </>
+      </div>
     );
   } else {
     sessionLinks = (

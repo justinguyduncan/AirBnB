@@ -24,42 +24,52 @@ module.exports = {
     {
       spotId: 3,
       preview: true,
-      url: 'https://media.istockphoto.com/id/1303750117/photo/modern-real-estate-front-exterior-blue-and-white-color-scheme-with-landscaping.jpg?s=1024x1024&w=is&k=20&c=krUQXH4mn7HljWpKSw8dzQ956Gdh3gfpMG2cQooMgD0=',
-
-    },{
+      url: 'https://cdn.onekindesign.com/wp-content/uploads/2019/10/Traditional-English-Manor-House-Jauregui-Architect-01-1-Kindesign.jpg',
+    },
+    {
       spotId: 4,
       preview: true,
-      url: 'https://media.istockphoto.com/photos/luxury-home-exterior-at-sunset-front-yard-picture-id184796502',
+      url: 'https://images.unsplash.com/photo-1494526585095-c41746248156',
     },
     {
       spotId: 5,
       preview: true,
-      url: 'https://media.istockphoto.com/photos/new-home-house-exterior-picture-id531171272',
+      url: 'https://images.unsplash.com/photo-1502005229762-cf1b2da7c5d6',
     },
     {
       spotId: 6,
       preview: true,
-      url: 'https://media.istockphoto.com/photos/house-exterior-picture-id187221210',
+      url: 'https://images.unsplash.com/photo-1518780664697-55e3ad937233',
     },
     {
       spotId: 7,
       preview: true,
-      url: 'https://media.istockphoto.com/photos/home-exterior-on-sunny-day-with-blue-sky-picture-id184796432',
+      url: 'https://images.unsplash.com/photo-1472224371017-08207f84aaae',
     },
     {
       spotId: 8,
       preview: true,
-      url: 'https://media.istockphoto.com/photos/luxury-home-exterior-with-sky-and-clouds-picture-id177707262',
+      url: 'https://images.unsplash.com/photo-1512918728675-ed5a9ecdebfd',
     },
     {
       spotId: 9,
       preview: true,
-      url: 'https://media.istockphoto.com/photos/home-exterior-with-stone-picture-id187221206',
+      url: 'https://images.unsplash.com/photo-1491557345352-5929e343eb89',
     },
     {
       spotId: 10,
       preview: true,
-      url: 'https://media.istockphoto.com/photos/luxury-home-exterior-at-sunset-picture-id506620656',
+      url: 'https://images.unsplash.com/photo-1516156008625-3a9d6067fab5',
+    },
+    {
+      spotId: 11,
+      preview: true,
+      url: 'https://thumbor.forbes.com/thumbor/fit-in/900x510/https://www.forbes.com/home-improvement/wp-content/uploads/2022/07/download-23.jpg',
+    },
+    {
+      spotId: 12,
+      preview: true,
+      url: 'https://images.unsplash.com/photo-1560184897-ae75f418493e',
     }
    ], {})
   },
