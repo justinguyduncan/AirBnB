@@ -2,7 +2,6 @@ import { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { createSpot } from '../../store/spots';
-import { getSpotDetails} from "../../store/spots";
 import './CreateSpot.css';
 
 const CreateSpot = ({spot = {}, match}) => {
@@ -19,8 +18,8 @@ const CreateSpot = ({spot = {}, match}) => {
     const [city, setCity] = useState(spot.city || '');
     const [state, setState] = useState(spot.state || '');
     const [country, setCountry] = useState(spot.country || '');
-    const [lat, setLat] = useState(spot.lat || 0);
-    const [lng, setLng] = useState(spot.lng || 0);
+    // const [lat, setLat] = useState(spot.lat || 0);
+    // const [lng, setLng] = useState(spot.lng || 0);
     const [name, setName] = useState(spot.name || '');
     const [description, setDescription] = useState(spot.description || '');
     const [price, setPrice] = useState(spot.price || 0);
@@ -37,32 +36,44 @@ const CreateSpot = ({spot = {}, match}) => {
             city: city,
             state: state,
             country: country,
-            lat: lat,
-            lng: lng,
+            // lat: lat,
+            // lng: lng,
             description: description,
             price: price,
             previewImage: previewImage
         };
-        console.log(createSpot(newSpotInput));
 
-        let newSpot = await dispatch(createSpot(newSpotInput));
-        console.log('new',newSpot);
-        if (newSpot.errors) {
-            setErrors(newSpot.errors);
-        } else {
-            history.push(`/spots/${newSpot.id}`);
-            setName('');
-            setAddress('');
-            setCity('');
-            setState('');
-            setCountry('');
-            setLat(null);
-            setLng(null);
-            setDescription('');
-            setPrice(null)
-            setPreviewImage('');
+        console.log(newSpotInput)
+        try {
+            let newSpot = await dispatch(createSpot(newSpotInput));
+            if (newSpot.errors) {
+                setErrors(newSpot.errors);
+            } else {
+                history.push(`/spots/${newSpot.id}`);
+                setName('');
+                setAddress('');
+                setCity('');
+                setState('');
+                setCountry('');
+                // setLat(null);
+                // setLng(null);
+                setDescription('');
+                setPrice(null)
+                setPreviewImage('');
+            }
+
+        } catch (res) {
+            const data = await res.json();
+            if (data && data.errors) {
+                const errorMessages = Object.values(data.errors);
+                setErrors(errorMessages);
+            } else if (data && data.message) {
+                setErrors([data.message]);
+            }
         }
     };
+
+
 
 
 
@@ -82,8 +93,7 @@ const CreateSpot = ({spot = {}, match}) => {
             ))}
 
             <label className='spot-label'>
-                <h2>Create a title for your spot</h2>
-                <h3>Catch guests' attention with a spot title that highlights what makes your place special</h3>
+                <h3>Name</h3>
                 <input
                 className='spot-input'
                 type='text'
@@ -93,7 +103,7 @@ const CreateSpot = ({spot = {}, match}) => {
                  />
             </label>
 
-            <hr className='spot-line-break' />
+            {/* <hr className='spot-line-break' /> */}
 
             <label className='spot-label'>
                 <h3>Address</h3>
@@ -145,9 +155,9 @@ const CreateSpot = ({spot = {}, match}) => {
                  />
             </label>
 
-            <hr className='spot-line-break' />
+            {/* <hr className='spot-line-break' /> */}
 
-            <label className='spot-label'>
+            {/* <label className='spot-label'>
                 <h3>Latitude</h3>
                 <input
                 className='spot-input'
@@ -156,11 +166,11 @@ const CreateSpot = ({spot = {}, match}) => {
                 value={lat}
                 onChange={e => setLat(e.target.value)}
                  />
-            </label>
+            </label> */}
 
 
 
-            <label className='spot-label'>
+            {/* <label className='spot-label'>
                 <h3>Longitude</h3>
                 <input
                 className='spot-input'
@@ -169,12 +179,12 @@ const CreateSpot = ({spot = {}, match}) => {
                 value={lng}
                 onChange={e => setLng(e.target.value)}
                  />
-            </label>
+            </label> */}
 
-            <hr className='spot-line-break' />
+            {/* <hr className='spot-line-break' /> */}
 
             <label className='spot-label'>
-
+            <h3>Description</h3>
                 <textarea
                 className='spot-input'
                 placeholder='Please write at least 30 characters'
@@ -188,11 +198,11 @@ const CreateSpot = ({spot = {}, match}) => {
             {/* <hr className='spot-line-break' /> */}
 
             <label className='spot-label'>
-                <h4>
-                Set a base price for your spot
+                <h3>
+                Price per night
 
-                </h4>
-                <input
+                </h3>
+               <input
                 className='spot-input'
                 type='text'
                 placeholder='Price per night (USD)'
@@ -200,9 +210,11 @@ const CreateSpot = ({spot = {}, match}) => {
                 onChange={e => setPrice(e.target.value)}
                  />
             </label>
-            <hr className='spot-line-break' />
-            <label className='spot-label'>
+            {/* <hr className='spot-line-break' /> */}
 
+
+            <label className='spot-label'>
+            <h3>Preview Image</h3>
                 <input
                 className='spot-input'
                 placeholder='Preview Image URL'

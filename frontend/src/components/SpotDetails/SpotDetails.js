@@ -176,36 +176,51 @@ if (!spotDetails) {
                     <div>
 
                     <h2>
-                        <i className="fa-solid fa-star">  </i>
-                     {spots.avgRating !== 0.0 && (
-                       <>
-                         <span>{spots.avgRating.toFixed(1)}</span> ·
-                       </>
-                     )}
-                     {reviewText}
-                    </h2>
-                        <button
-                        onClick={handleAddReviewModal}
-                        className="add-review-modal-button"
-                        disabled={!sessionUser || hasUserReviewed || isCurrentUserHost}
+    <i className="fa-solid fa-star">  </i>
+    {spots.avgRating !== 0.0 && (
+        <>
+            <span>{spots.avgRating.toFixed(1)}</span> ·
+        </>
+    )}
+    {reviewText}
+</h2>
+<button
+    onClick={handleAddReviewModal}
+    className="add-review-modal-button"
+    disabled={!sessionUser || hasUserReviewed || isCurrentUserHost}
+>
+    Post Your Review
+</button>
 
-                        >Post Your Review</button>
+{filteredReviews.length === 0 && (
+    <h3>Be the first to post a review!</h3>
+)}
 
 
-                            {filteredReviews && (filteredReviews).map(review => (
-                            <div key={review?.id}>
-                            <p>{review?.User.firstName} {review.User.lastName}</p>
-                            <p>{review?.review}</p>
-                            <p>{review?.stars} stars</p>
+{filteredReviews && filteredReviews.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt)).map(review => {
+  const date = new Date(review.createdAt);
+  const formattedDate = date.toLocaleString('default', { month: 'long', year: 'numeric' });
 
-                            <button
-                            className="detail-review-delete"
-                             onClick={() => handleDeleteReview(review.id, spots.id)} disabled={!sessionUser}>
-                            Delete Review
-                            </button>
+  return (
+    <div className='review-box-shadow' key={review?.id}>
+    <p>{review?.User.firstName} {review.User.lastName}</p>
+    <p>{review?.review}</p>
+    <p>{review?.stars} stars</p>
+    <p>{formattedDate}</p>
 
-                        </div>
-                        ))}
+    {review.userId === sessionUserId && (
+      <button
+        className="detail-review-delete"
+        onClick={() => handleDeleteReview(review.id, spots.id)}
+      >
+        Delete Review
+      </button>
+    )}
+  </div>
+  )
+})}
+
+
 
                         {/* {sessionUser && (
                         <CreateReview spotId={spotId} />

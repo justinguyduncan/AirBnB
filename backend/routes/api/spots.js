@@ -11,6 +11,11 @@ const { handleValidationErrors } = require('../../utils/validation');
 const { response } = require('express');
 
 const validateSpot = [
+  check('name')
+        .exists({checkFalsy: true})
+        .isString()
+        .isLength({min:5, max: 50})
+        .withMessage({message: 'Name is required'}),
     check('address')
         .exists({checkFalsy: true})
         .withMessage({message: 'Street address is required'}),
@@ -23,26 +28,29 @@ const validateSpot = [
     check('country')
         .exists({checkFalsy: true})
         .withMessage({message: 'Country is required'}),
-    check('lat')
-        .exists({checkFalsy: true})
-        .isDecimal()
-        .withMessage({message: 'Latitude is not valid'}),
-    check('lng')
-        .exists({checkFalsy: true})
-        .isDecimal()
-        .withMessage({message: 'Longitude is not valid'}),
-    check('name')
-        .exists({checkFalsy: true})
-        .isString()
-        .withMessage({message: 'Name must be less than 50 characters'}),
+    // check('lat')
+    //     .exists({checkFalsy: true})
+    //     .isDecimal()
+    //     .withMessage({message: 'Latitude is not valid'}),
+    // check('lng')
+    //     .exists({checkFalsy: true})
+    //     .isDecimal()
+    //     .withMessage({message: 'Longitude is not valid'}),
     check('description')
         .exists({checkFalsy: true})
         .isString()
-        .withMessage({message: 'Description is required'}),
-    check('price')
+        .isLength({min: 30})
+        .withMessage({message: 'Description needs 30 or more characters'}),
+        check('price')
         .exists({checkFalsy: true})
         .isNumeric()
-        .withMessage({message: 'Price per day is required'}),
+        .custom((value, { req }) => {
+            if (value <= 0 || value !== Number) {
+                throw new Error('Price is required');
+            } else {
+                return true;
+            }
+        }),
     handleValidationErrors
 ]
 

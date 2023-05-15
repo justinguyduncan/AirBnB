@@ -26,7 +26,41 @@ module.exports = {
       preview: true,
       url: 'https://media.istockphoto.com/id/1303750117/photo/modern-real-estate-front-exterior-blue-and-white-color-scheme-with-landscaping.jpg?s=1024x1024&w=is&k=20&c=krUQXH4mn7HljWpKSw8dzQ956Gdh3gfpMG2cQooMgD0=',
 
+    },{
+      spotId: 4,
+      preview: true,
+      url: 'https://media.istockphoto.com/photos/luxury-home-exterior-at-sunset-front-yard-picture-id184796502',
     },
+    {
+      spotId: 5,
+      preview: true,
+      url: 'https://media.istockphoto.com/photos/new-home-house-exterior-picture-id531171272',
+    },
+    {
+      spotId: 6,
+      preview: true,
+      url: 'https://media.istockphoto.com/photos/house-exterior-picture-id187221210',
+    },
+    {
+      spotId: 7,
+      preview: true,
+      url: 'https://media.istockphoto.com/photos/home-exterior-on-sunny-day-with-blue-sky-picture-id184796432',
+    },
+    {
+      spotId: 8,
+      preview: true,
+      url: 'https://media.istockphoto.com/photos/luxury-home-exterior-with-sky-and-clouds-picture-id177707262',
+    },
+    {
+      spotId: 9,
+      preview: true,
+      url: 'https://media.istockphoto.com/photos/home-exterior-with-stone-picture-id187221206',
+    },
+    {
+      spotId: 10,
+      preview: true,
+      url: 'https://media.istockphoto.com/photos/luxury-home-exterior-at-sunset-picture-id506620656',
+    }
    ], {})
   },
 

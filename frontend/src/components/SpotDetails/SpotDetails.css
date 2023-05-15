@@ -148,3 +148,10 @@
     font-family: 'Montserrat', sans-serif;
     font-weight: bold;
   }
+
+  .review-box-shadow {
+    margin-bottom: 10px;
+    padding: 20px; /* add some padding so the content isn't too close to the edges */
+    max-width: 200px; /* this could be any value that works for your design */
+    margin: left;
+  }
