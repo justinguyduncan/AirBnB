@@ -204,7 +204,7 @@ const CreateSpot = ({spot = {}, match}) => {
                 </h3>
                <input
                 className='spot-input'
-                type='text'
+                type='number'
                 placeholder='Price per night (USD)'
                 value={price}
                 onChange={e => setPrice(e.target.value)}

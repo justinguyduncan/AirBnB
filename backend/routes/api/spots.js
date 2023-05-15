@@ -14,7 +14,7 @@ const validateSpot = [
   check('name')
         .exists({checkFalsy: true})
         .isString()
-        .isLength({min:5, max: 50})
+        .isLength({min:1, max: 50})
         .withMessage({message: 'Name is required'}),
     check('address')
         .exists({checkFalsy: true})
@@ -45,7 +45,7 @@ const validateSpot = [
         .exists({checkFalsy: true})
         .isNumeric()
         .custom((value, { req }) => {
-            if (value <= 0 || value !== Number) {
+            if (value <= 0 ) {
                 throw new Error('Price is required');
             } else {
                 return true;
