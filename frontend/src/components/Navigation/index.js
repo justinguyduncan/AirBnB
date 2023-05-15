@@ -12,9 +12,11 @@ import AirbnbLogo from './logo';
 function Navigation({ isLoaded }) {
   const sessionUser = useSelector(state => state.session.user);
 
+
+
   let sessionLinks;
   if (sessionUser) {
-
+console.log(sessionUser)
   // console.log(sessionUser)
     sessionLinks = (
       <>

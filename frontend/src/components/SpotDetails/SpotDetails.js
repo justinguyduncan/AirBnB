@@ -10,10 +10,12 @@ import CreateReviewModal from "../CreateReviewModal/CreateReviewModal";
 import "./SpotDetails.css";
 
 
-const SpotDetails = ({spot}) => {
+const SpotDetails = ({spot}, match) => {
     const dispatch = useDispatch();
     const {spotId} = useParams();
     const spots = useSelector(state => state.spots[spotId]);
+    const [spotDetails, setSpotDetails] = useState(null);
+
 
     const reviews = useSelector(state => state.reviews);
     const filteredReviews = Object.values(reviews).filter((review) => review?.spotId === spots?.id)
@@ -37,6 +39,24 @@ const SpotDetails = ({spot}) => {
       useEffect(() => {
         dispatch(getAllReviews(spotId));
       }, [dispatch, spotId]);
+
+      useEffect(() => {
+        const fetchSpotDetails = async () => {
+          try {
+            // Your fetch code here, e.g.,
+            const response = await fetch(`/api/spots/${spotId}`);
+            if (!response.ok) {
+              throw new Error(`HTTP error! status: ${response.status}`);
+            }
+            const data = await response.json();
+            setSpotDetails(data);
+          } catch (error) {
+            console.error('Failed to fetch spot details:', error);
+          }
+        };
+        console.log(spotDetails)
+        fetchSpotDetails();
+      }, [spotId]);
 
     // Delete Review modals
     const [showModal, setShowModal] = useState(false);
@@ -88,6 +108,10 @@ if (reviewCount === 0) {
   reviewText = `${reviewCount} Reviews`;
 }
 
+
+if (!spotDetails) {
+  return <div>Loading...</div>;
+}
     return (
 <div>
     {spots && spots.Owner && (

@@ -1,12 +1,19 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { createSpot } from '../../store/spots';
+import { getSpotDetails} from "../../store/spots";
 import './CreateSpot.css';
 
-const CreateSpot = ({spot = {}}) => {
+const CreateSpot = ({spot = {}, match}) => {
     const history = useHistory();
     const dispatch = useDispatch();
+    const [errors, setErrors] = useState({});
+    // const spotId = match.params.spotId;
+
+
+
+
 
     const [address, setAddress] = useState(spot.address || '');
     const [city, setCity] = useState(spot.city || '');
@@ -20,6 +27,7 @@ const CreateSpot = ({spot = {}}) => {
     const [previewImage, setPreviewImage] = useState(spot.previewImage || '');
 
     const handleSubmit = async (e) => {
+        console.log('handleSubmit is being called');
         e.preventDefault();
 
         const newSpotInput = {
@@ -35,14 +43,14 @@ const CreateSpot = ({spot = {}}) => {
             price: price,
             previewImage: previewImage
         };
+        console.log(createSpot(newSpotInput));
 
-        let newSpot;
-        newSpot = await dispatch(createSpot(newSpotInput));
-
-
-        if(newSpot) {
+        let newSpot = await dispatch(createSpot(newSpotInput));
+        console.log('new',newSpot);
+        if (newSpot.errors) {
+            setErrors(newSpot.errors);
+        } else {
             history.push(`/spots/${newSpot.id}`);
-
             setName('');
             setAddress('');
             setCity('');
@@ -54,8 +62,10 @@ const CreateSpot = ({spot = {}}) => {
             setPrice(null)
             setPreviewImage('');
         }
-
     };
+
+
+
 
 
     return (
@@ -64,6 +74,12 @@ const CreateSpot = ({spot = {}}) => {
             <h1 className='create-form-header'>Create A Spot</h1>
             <h2 className='create-form-header'>Where's your place located?</h2>
             <h4 className='create-form-header'>Guests will only get your exact address once they booked a reservation</h4>
+
+            {Object.values(errors).map((error, idx) => (
+                <div key={idx} style={{color: 'red'}}>
+                    {typeof error === 'object' ? error.message : error}
+                </div>
+            ))}
 
             <label className='spot-label'>
                 <h2>Create a title for your spot</h2>
@@ -166,6 +182,8 @@ const CreateSpot = ({spot = {}}) => {
                 onChange={e => setDescription(e.target.value)}
                  />
             </label>
+
+
 
             {/* <hr className='spot-line-break' /> */}
 
