@@ -1,10 +1,12 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import "./SpotsIndex/SpotsIndex.css";
+import { useHistory } from 'react-router-dom';
 
 const SpotsIndexItem = ({ spot, previewImage }) => {
+  const history = useHistory();
   return (
-    <li key={`spot-${spot.id}`} className="spot-card" onClick={() => { window.location.href = `/spots/${spot.id}`; }}>
+    <li key={`spot-${spot.id}`} className="spot-card" onClick={() => { history.push(`/spots/${spot.id}`); }}>
       <div
         className="spot-image-wrapper"
         style={{

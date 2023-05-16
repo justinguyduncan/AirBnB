@@ -71,8 +71,8 @@ const validateReview = [
 router.get('/', async (req, res) => {
   let { page, size, minLat, maxLat, minLng, maxLng, minPrice, maxPrice } = req.query;
 
-  page = Number(page);
-  size = Number(size);
+  // page = Number(page);
+  // size = Number(size);
 
   // Check for invalid query parameters
   // if (Number.isNaN(page) || page <= 0 || Number.isNaN(size) || size <= 0 ||
@@ -86,26 +86,26 @@ router.get('/', async (req, res) => {
   // }
 
   // Set default values for page and size
-  if (!page) page = 1;
-  if (!size) size = 20;
+  // if (!page) page = 1;
+  // if (!size) size = 2000;
 
   const spots = await Spot.findAll({
     where: {
-      lat: {
-        [Op.gte]: minLat || -90,
-        [Op.lte]: maxLat || 90,
-      },
-      lng: {
-        [Op.gte]: minLng || -180,
-        [Op.lte]: maxLng || 180,
-      },
-      price: {
-        [Op.gte]: minPrice || 0,
-        [Op.lte]: maxPrice || 999999,
-      },
+      // lat: {
+      //   [Op.gte]: minLat || -90,
+      //   [Op.lte]: maxLat || 90,
+      // },
+      // lng: {
+      //   [Op.gte]: minLng || -180,
+      //   [Op.lte]: maxLng || 180,
+      // },
+      // price: {
+      //   [Op.gte]: minPrice || 0,
+      //   [Op.lte]: maxPrice || 999999,
+      // },
     },
-    limit: size,
-    offset: Math.abs(size * (page - 1)),
+    //limit: size,
+    // offset: Math.abs(size * (page - 1)),
     attributes: [
       'id',
       'ownerId',
@@ -113,8 +113,8 @@ router.get('/', async (req, res) => {
       'city',
       'state',
       'country',
-      'lat',
-      'lng',
+      // 'lat',
+      // 'lng',
       'name',
       'description',
       'price',
@@ -159,7 +159,7 @@ router.get('/', async (req, res) => {
     }
   }
 
-  return res.json({ spots, page, size });
+  return res.json({ spots });
 });
 
 //Create a new spot
